@@ -1,15 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
 
+<head>
+  <title>AI Video Compression</title>
+  <meta charset="UTF-8">
+  <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" type="text/css">
 
-  <body>
-    <h1>Live streaming</h1>
-    <div>
+</head>
 
-        <img src="{{ url_for('video') }}" width="50%"/>
+<body>
+  <div class="wrapper row1">
+    <header id="header" class="clear">
+      <div id="hgroup">
+        <h1>AI Video Compression and Decompression</h1>
+        <h2>ELG5121: Multimedia Communications</h2>
+        <h2>Group 12: David Talson & Shuli Wang</h2>
+      </div>
+    </header>
+  </div>
+  <!-- content -->
+  <div class="wrapper row2">
+    <div id="container" class="clear">
+      <!-- content body -->
+      <div class="video_display">
+        <div class="video_single">
+          <h1>Before Compression</h1>
+          <section id="slider"><img src="{{ url_for('video_before') }}" width="100%" /></section>
+        </div>
+        <div class="video_single">
+          <h1>After Compression</h1>
+          <section id="slider"><img src="{{ url_for('video_after') }}" width="100%" /></section>
+        </div>
+
+      </div>
+
+      <section id="shout">
+        <p>Novel video compression technique where neural networks are used to compression video on the server through
+          encoding and decompress on the client through decoding.</p>
+      </section>
+      <!-- main content -->
+      <div id="homepage">
+        <!-- services area -->
+        <h1>Metrics</h1>
+        <div id="services" class="clear">
+          <div class="metrics">
+            <h2>Image Size :</h2>
+            <h6>(Before Compression)</h6>
+            <div hx-get="/size_b" hx-trigger="every 2s"></div>
+
+          </div>
+          <div class="metrics">
+            <h2>Image Size :</h2>
+            <h6>(After Compression)</h6>
+            <div hx-get="/size_a" hx-trigger="every 2s"></div>
+          </div>
+          <div class="metrics">
+            <h2>Framerate:</h2>
+            <div hx-get="/fps" hx-trigger="every 2s"></div>
+          </div>
+
+          <div class="metrics">
+            <h2>Compression Factor:</h2>
+            <div hx-get="/com_fac" hx-trigger="every 2s"></div>
+          </div>
+        </div>
+
+      </div>
     </div>
-            
-    </body>
+    <h1>Comparision to Available Codecs</h1>
+    <section id="latest" class="last clear">
+      <div class="one_quarter">
 
+      </div>
+      <div class="one_quarter">
+
+      </div>
+      <div class="one_quarter">
+
+      </div>
+      <div class="one_quarter lastbox">
+
+      </div>
+    </section>
+    <!-- / One Quarter -->
+  </div>
+  <!-- / content body -->
+  </div>
+  </div>
+  <!-- Footer -->
+  <div class="wrapper row3">
+    <footer id="footer" class="clear">
+      <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved </p>
+      <p class="fl_right">Template by </p>
+    </footer>
+  </div>
+</body>
 
 </html>
