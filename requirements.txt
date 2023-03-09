@@ -1,7 +1,0 @@
-numpy==1.23.3
-PyInputPlus==0.2.12
-PySimpleValidate==0.2.12
-stdiomask==0.0.6
-torch==1.12.1
-typing_extensions==4.3.0
-flask==2.2.3
