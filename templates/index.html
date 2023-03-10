@@ -47,17 +47,21 @@
           <div class="metrics">
             <h2>Image Size :</h2>
             <h6>(Before Compression)</h6>
-            <div hx-get="/size_b" hx-trigger="every 2s"></div>
+            <div hx-get="/size_b" hx-trigger="every 2s">
+            </div>
+            <p>kB</p>
 
           </div>
           <div class="metrics">
             <h2>Image Size :</h2>
             <h6>(After Compression)</h6>
-            <div hx-get="/size_a" hx-trigger="every 2s"></div>
+            <div hx-get="/size_a" hx-trigger="every 2s">
+            </div>
+            <p>kB</p>
           </div>
           <div class="metrics">
-            <h2>Framerate:</h2>
-            <div hx-get="/fps" hx-trigger="every 2s"></div>
+            <h2>Bitrate:</h2>
+            <div hx-get="/fps" hx-trigger="every 2s">fps</div>
           </div>
 
           <div class="metrics">

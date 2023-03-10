@@ -1,11 +1,6 @@
 import socketio
 from flask import Flask, render_template, Response, jsonify
-import torch
-from torchvision import transforms
-import numpy
-import cv2
-import io
-from PIL import Image
+
 
 sio = socketio.Client()
 
@@ -56,7 +51,7 @@ def video_before():
 
 @app.route("/size_b")
 def size_b():
-    return jsonify(image_size[len(image_size) - 1])
+    return jsonify(image_size[len(image_size) - 1] / 1000)
 
 
 @app.route("/fps")
@@ -66,7 +61,7 @@ def fps():
 
 @app.route("/size_a")
 def size_a():
-    return jsonify(image_size_a[len(image_size_a) - 1])
+    return jsonify(image_size_a[len(image_size_a) - 1] / 1000)
 
 
 @app.route("/com_fac")

@@ -7,7 +7,6 @@ from torchvision import transforms
 import numpy
 import torch.nn.functional as F
 import pytorch_lightning as pl
-from PIL import Image
 
 
 class Autoencoder(pl.LightningModule):
@@ -15,15 +14,19 @@ class Autoencoder(pl.LightningModule):
         super().__init__()
 
         self.encoder = torch.nn.Sequential(
-            torch.nn.Conv2d(3, 512, 2, 2, 1),
+            torch.nn.Conv2d(3, 256, 2, 2, 1),
             # torch.nn.LeakyReLU(True),
-            # torch.nn.Conv2d(128, 256, 4, 2, 1, bias=False),
+            # torch.nn.Conv2d(128, 256, 4, 2, 1),
             # torch.nn.LeakyReLU(True),
-            # torch.nn.Conv2d(256, 512, 4, 2, 1, bias=False),
+            # torch.nn.Conv2d(256, 512, 4, 2, 1),
             # torch.nn.LeakyReLU(True),
         )
         self.decoder = torch.nn.Sequential(
-            torch.nn.Conv2d(512, 3, 2, 2, 1),
+            # torch.nn.Conv2d(512, 256, 4, 2, 1),
+            # torch.nn.LeakyReLU(True),
+            # torch.nn.Conv2d(256, 256, 4, 2, 1),
+            # torch.nn.LeakyReLU(True),
+            torch.nn.Conv2d(256, 3, 2, 2, 1),
             torch.nn.LeakyReLU(True),
         )
 
@@ -43,11 +46,6 @@ img_width_after = camera.get(cv2.CAP_PROP_FRAME_HEIGHT)
 @socketio.on("message")
 def message(data):
     transform1 = transforms.ToPILImage()
-    # specify loss function
-    criterion = torch.nn.BCELoss()
-
-    # specify loss function
-    optimizer = torch.torch.optim.Adam(model.parameters(), lr=0.001)
     while True:
         success, frame = camera.read()
         dim = (512, 512)
@@ -58,11 +56,9 @@ def message(data):
         else:
             ret, buffer_before = cv2.imencode(".jpg", frame)
             frameN = buffer_before.tobytes()
-        optimizer.zero_grad()
         image = tensor_transform(frame)
         compressed_image = model(image)
-        loss = criterion(compressed_image, image)
-        loss.backward()
+
         img = transform1(compressed_image)
         image = numpy.array(img)
         image_new = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
