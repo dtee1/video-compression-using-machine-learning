@@ -14,6 +14,9 @@ def response(frame):
     fps_host.append(frame["FPS"])
     image_size_a.append(frame["size_after"])
     frames_b.append(frame["from"])
+    psnr.append(frame["psnr"])
+    ssim.append(frame["ssim_score"])
+    data_loss.append(frame["data_loss"])
 
 
 def generate_frame(type_):
@@ -51,7 +54,7 @@ def video_before():
 
 @app.route("/size_b")
 def size_b():
-    return jsonify(image_size[len(image_size) - 1] / 1000)
+    return jsonify(int(image_size[len(image_size) - 1] / 1000))
 
 
 @app.route("/fps")
@@ -61,13 +64,28 @@ def fps():
 
 @app.route("/size_a")
 def size_a():
-    return jsonify(image_size_a[len(image_size_a) - 1] / 1000)
+    return jsonify(int(image_size_a[len(image_size_a) - 1] / 1000))
 
 
 @app.route("/com_fac")
 def com_fac():
     result = image_size[len(image_size) - 1] / image_size_a[len(image_size_a) - 1]
     return jsonify(int(result))
+
+
+@app.route("/psnr")
+def psnr():
+    return jsonify(int(psnr[len(psnr) - 1]))
+
+
+@app.route("/ssim")
+def ssim():
+    return jsonify(round(ssim[len(ssim) - 1], 2))
+
+
+@app.route("/data_loss")
+def data_loss():
+    return jsonify(round(data_loss[len(data_loss) - 1], 2))
 
 
 @app.route("/")
@@ -81,6 +99,9 @@ if __name__ == "__main__":
     fps_host = []
     image_size_a = []
     frames_b = [b"None"]
+    psnr = []
+    ssim = []
+    data_loss = []
 
     sio.connect("http://10.0.0.100:5000")
     sio.emit("message", {"from": "client"})

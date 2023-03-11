@@ -45,29 +45,55 @@
         <h1>Metrics</h1>
         <div id="services" class="clear">
           <div class="metrics">
-            <h2>Image Size :</h2>
-            <h6>(Before Compression)</h6>
-            <div hx-get="/size_b" hx-trigger="every 2s">
+            <h2>Image Size (Before)</h2>
+            <div class="row">
+              <div hx-get="/size_b" hx-trigger="every 2s">
+              </div>
+              <p>kB</p>
             </div>
-            <p>kB</p>
-
           </div>
           <div class="metrics">
-            <h2>Image Size :</h2>
-            <h6>(After Compression)</h6>
-            <div hx-get="/size_a" hx-trigger="every 2s">
+            <h2>Image Size (After)</h2>
+            <div class="row">
+              <div hx-get="/size_a" hx-trigger="every 2s">
+              </div>
+              <p>kB</p>
             </div>
-            <p>kB</p>
           </div>
           <div class="metrics">
             <h2>Bitrate:</h2>
-            <div hx-get="/fps" hx-trigger="every 2s">fps</div>
+            <div class="row">
+              <div hx-get="/fps" hx-trigger="every 2s"></div>
+              <p>fps</p>
+            </div>
           </div>
 
           <div class="metrics">
             <h2>Compression Factor:</h2>
             <div hx-get="/com_fac" hx-trigger="every 2s"></div>
           </div>
+          <div class="metrics">
+            <h2>PSNR:</h2>
+            <div class="row">
+              <div hx-get="/psnr" hx-trigger="every 2s"></div>
+              <p>DB</p>
+            </div>
+          </div>
+          <div class="metrics">
+            <h2>SSIM:</h2>
+            <div class="row">
+              <div hx-get="/ssim" hx-trigger="every 2s"></div>
+              <p></p>
+            </div>
+          </div>
+          <div class="metrics">
+            <h2>Data Loss:</h2>
+            <div class="row">
+              <div hx-get="/data_loss" hx-trigger="every 2s"></div>
+              <p>%</p>
+            </div>
+          </div>
+
         </div>
 
       </div>
